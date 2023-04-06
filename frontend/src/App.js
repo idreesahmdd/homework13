@@ -5,7 +5,8 @@ import Login from "./Page/Login";
 import Home from "./Page/Home";
 import Register from "./Page/Register";
 import AddBook from "./Page/AddBook";
-import UpdateBook from "./Components/UpdateBook";
+import UpdateBook from "./Page/UpdateBook";
+import BookDetail from "./Page/DetailBook";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/" Component={Home} />
+					<Route path="/books/:id" Component={BookDetail} />
 					<Route path="/login" Component={Login} />
 					<Route path="/register" Component={Register} />
 					<Route
@@ -24,7 +26,7 @@ function App() {
 						}
 					/>
 					<Route
-						path="/books/:id"
+						path="/editbook/:id"
 						element={
 							<ProtectedRoute>
 								<UpdateBook />

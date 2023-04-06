@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
+import Navbar from "../Components/Navbar";
 import { Flex, Input, Button, FormLabel, Stack, Heading, FormControl, HStack, Box } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -112,7 +112,6 @@ function UpdateBook() {
 								</FormControl>
 							</Stack>
 							<Stack gap="4" pl="12" borderLeft="2px solid #319795">
-								{/* <HStack> */}
 								<Flex w="48" gap="6">
 									<FormControl>
 										<FormLabel color="whiteAlpha.900" textAlign="center">
@@ -128,7 +127,6 @@ function UpdateBook() {
 										<Input type="number" value={pages} textAlign="center" onChange={(e) => setPages(e.target.value)} color="blackAlpha.800" bg="whiteAlpha.900" />
 									</FormControl>
 								</Flex>
-								{/* </HStack> */}
 								<FormControl>
 									<FormLabel color="whiteAlpha.900" textAlign="center">
 										Image

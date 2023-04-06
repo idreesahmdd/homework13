@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios";
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Button, Spacer } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Button, Spacer, Text } from "@chakra-ui/react";
 
 function Home() {
 	const [book, setBook] = useState([]);
+	const navigate = useNavigate();
 	const token = localStorage.getItem("token");
 
 	useEffect(() => {
 		const fetchBook = async () => {
 			try {
-				const book = await axios({
+				const result = await axios({
 					method: "get",
 					url: "/books"
 				});
-				setBook(book.data.books);
+				setBook(result.data.books);
 				// console.log(test.id);
 			} catch (err) {
 				console.log(err);
@@ -69,7 +70,7 @@ function Home() {
 							<Th fontSize="md">Year</Th>
 							<Th fontSize="md">Pages</Th>
 							<Th fontSize="md">Image</Th>
-							{localStorage.getItem("token") && (
+							{token && (
 								<>
 									<Th>Action</Th>
 								</>
@@ -81,7 +82,13 @@ function Home() {
 							// console.log(book.image);
 							return (
 								<Tr key={index}>
-									<Td>{book.title}</Td>
+									<Td
+										onClick={() => {
+											navigate(`/books/${book.id}`);
+										}}
+									>
+										<Text className="title-link">{book.title}</Text>
+									</Td>
 									<Td>{book.author}</Td>
 									<Td>{book.publisher}</Td>
 									<Td>{book.year}</Td>
@@ -89,9 +96,9 @@ function Home() {
 									<Td>
 										<Image src={`http://localhost:8000/${book.image}`} boxSize="100px" objectFit="cover" />
 									</Td>
-									{localStorage.getItem("token") && (
+									{token && (
 										<Td>
-											<Link to={`/books/${book.id}`}>
+											<Link to={`/editbook/${book.id}`}>
 												<Button w="20" value={book.id} color="white" bg="whatsapp.500">
 													Update
 												</Button>
