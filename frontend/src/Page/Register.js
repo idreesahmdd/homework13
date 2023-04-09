@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Center, Input, Button, FormLabel, Stack, InputGroup, InputRightElement, Text, FormControl } from "@chakra-ui/react";
+import { Flex, Center, Input, Button, FormLabel, Image, Stack, InputGroup, InputRightElement, Text, FormControl } from "@chakra-ui/react";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios";
 import Swal from "sweetalert2";
+import hide from "../assets/hide.png";
+import showpass from "../assets/show.png";
 
 function Register() {
 	const [name, setName] = useState("");
@@ -92,12 +94,8 @@ function Register() {
 								Password
 							</FormLabel>
 							<InputGroup size="md">
-								<Input type={show ? "text" : "password"} onChange={(e) => setPassword(e.target.value)} color="blackAlpha.800" maxLength={"16"} placeholder="Enter Password" bg="whiteAlpha.900" />
-								<InputRightElement width="4.5rem">
-									<Button h="1.75rem" size="sm" bg="blackAlpha.700" color="whiteAlpha.900" onClick={handleShowPassword}>
-										{show ? "Hide" : "Show"}
-									</Button>
-								</InputRightElement>
+								<Input type={show ? "text" : "password"} onChange={(e) => setPassword(e.target.value)} color="blackAlpha.800" maxLength={"16"} placeholder="Enter Password" mb="4" bg="whiteAlpha.900" />
+								<InputRightElement mr="1">{show ? <Image src={showpass} onClick={handleShowPassword} alt="Show" width={"6"} /> : <Image src={hide} onClick={handleShowPassword} alt="Hide" width={"6"} />}</InputRightElement>
 							</InputGroup>
 						</FormControl>
 
@@ -107,10 +105,8 @@ function Register() {
 							</FormLabel>
 							<InputGroup size="md" mb="4">
 								<Input type={confirmShow ? "text" : "password"} onChange={(e) => setConfirmPassword(e.target.value)} color="blackAlpha.800" maxLength={"16"} placeholder="Confirm Password" bg="whiteAlpha.900" />
-								<InputRightElement width="4.5rem">
-									<Button h="1.75rem" size="sm" bg="blackAlpha.700" color="whiteAlpha.900" onClick={handleShowConfirmPassword}>
-										{confirmShow ? "Hide" : "Show"}
-									</Button>
+								<InputRightElement mr="1">
+									{confirmShow ? <Image src={showpass} onClick={handleShowConfirmPassword} alt="Show" width={"6"} /> : <Image src={hide} onClick={handleShowConfirmPassword} alt="Hide" width={"6"} />}
 								</InputRightElement>
 							</InputGroup>
 							{password !== confirmPassword && (

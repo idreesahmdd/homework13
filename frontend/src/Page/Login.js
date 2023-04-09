@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Flex, Center, Input, Button, FormLabel, Stack, InputGroup, InputRightElement, Text, FormControl, Box } from "@chakra-ui/react";
+import { Flex, Center, Input, Button, FormLabel, Stack, InputGroup, InputRightElement, Text, FormControl, Image } from "@chakra-ui/react";
 import "../index.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios";
 import Swal from "sweetalert2";
+import hide from "../assets/hide.png";
+import showpass from "../assets/show.png";
 
 function Login() {
 	const [email, setEmail] = useState("");
@@ -58,11 +60,7 @@ function Login() {
 							</FormLabel>
 							<InputGroup size="md">
 								<Input type={show ? "text" : "password"} onChange={(e) => setPassword(e.target.value)} color="blackAlpha.800" maxLength={"16"} placeholder="Enter Password" mb="4" bg="whiteAlpha.900" />
-								<InputRightElement width="4.5rem">
-									<Button h="1.75rem" size="sm" bg="blackAlpha.700" color="whiteAlpha.900" onClick={handleShowPassword}>
-										{show ? "Hide" : "Show"}
-									</Button>
-								</InputRightElement>
+								<InputRightElement mr="1">{show ? <Image src={showpass} onClick={handleShowPassword} alt="Show" width={"6"} /> : <Image src={hide} onClick={handleShowPassword} alt="Hide" width={"6"} />}</InputRightElement>
 							</InputGroup>
 						</FormControl>
 
